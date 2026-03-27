@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stem Cells - Science Research Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green: #4a7c59;
+      --green-hover: #3a6347;
+      --light-green: #d4e8d9;
+      --pale-green: #f0f7f2;
+      --white: #ffffff;
+      --gray: #f4f4f4;
+      --dark: #2c3e2d;
+      --mid-gray: #666;
+      --border: #e0e0e0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background-color: var(--pale-green);
+      color: var(--dark);
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, #2c3e2d 0%, #4a7c59 100%);
+      color: var(--white);
+      padding: 56px 24px 44px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Stem_cells_025.jpg/1280px-Stem_cells_025.jpg') center/cover no-repeat;
+      opacity: 0.1;
+    }
+
+    header > * { position: relative; }
+
+    .header-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #cde8d4;
+      font-size: 0.78rem;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    header h1 {
+      font-family: 'Merriweather', serif;
+      font-size: 2.6rem;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    header p { font-size: 1rem; opacity: 0.85; }
+
+    /* HERO STRIP */
+    .hero-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      height: 190px;
+      overflow: hidden;
+    }
+
+    .hero-strip img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* NAV */
+    nav {
+      background-color: var(--dark);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 12px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    }
+
+    nav button {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #cde8d4;
+      padding: 9px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-family: 'Source Sans 3', sans-serif;
+      transition: all 0.2s;
+    }
+
+    nav button:hover, nav button.active {
+      background-color: var(--green);
+      color: white;
+      border-color: var(--green);
+    }
+
+    /* MAIN */
+    main {
+      max-width: 920px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .section-heading {
+      font-family: 'Merriweather', serif;
+      font-size: 1.4rem;
+      color: var(--green);
+      margin-bottom: 24px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--light-green);
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 28px 30px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+    }
+
+    .card h2 {
+      font-family: 'Merriweather', serif;
+      font-size: 1.05rem;
+      color: var(--green);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card h2::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 18px;
+      background: var(--green);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .card p { line-height: 1.8; color: #444; font-size: 0.96rem; }
+    .card p + p { margin-top: 12px; }
+
+    /* IMAGE CARD */
+    .card-with-img {
+      background: var(--white);
+      border-radius: 10px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .card-img-top {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .img-caption {
+      font-size: 0.75rem;
+      color: var(--mid-gray);
+      text-align: center;
+      padding: 7px 14px;
+      background: var(--gray);
+      border-bottom: 1px solid var(--border);
+      font-style: italic;
+    }
+
+    .card-img-body { padding: 26px 30px; }
+
+    .card-img-body h2 {
+      font-family: 'Merriweather', serif;
+      font-size: 1.05rem;
+      color: var(--green);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-img-body h2::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 18px;
+      background: var(--green);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .card-img-body p { line-height: 1.8; color: #444; font-size: 0.96rem; }
+    .card-img-body p + p { margin-top: 12px; }
+
+    /* PARTNER LABEL */
+    .partner-label {
+      display: inline-block;
+      background-color: var(--light-green);
+      color: var(--green);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    /* SCIENTIST BOX */
+    .scientist-grid {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 0;
+      margin-top: 14px;
+      background: var(--gray);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) { .scientist-grid { grid-template-columns: 1fr; } }
+
+    .scientist-img { width: 100%; height: 100%; object-fit: cover; min-height: 170px; display: block; }
+
+    .scientist-info { padding: 20px; }
+
+    .scientist-info h3 {
+      font-family: 'Merriweather', serif;
+      font-size: 0.95rem;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .scientist-info ul { padding-left: 18px; line-height: 1.85; color: #444; font-size: 0.9rem; }
+
+    /* FUN FACT */
+    .fun-fact {
+      background: linear-gradient(to right, var(--light-green), #e8f5ec);
+      border-radius: 8px;
+      padding: 16px 22px;
+      margin-bottom: 24px;
+      font-size: 0.92rem;
+      color: var(--dark);
+      border-left: 4px solid var(--green);
+    }
+
+    .fun-fact strong { color: var(--green); }
+
+    /* PROS / CONS */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 14px; }
+    @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+    .pros-box, .cons-box { border-radius: 8px; padding: 18px 20px; }
+    .pros-box { background: #e8f5ec; border-top: 3px solid var(--green); }
+    .cons-box { background: #fdf0f0; border-top: 3px solid #c0392b; }
+
+    .pros-box h3 { color: var(--green); margin-bottom: 10px; font-size: 0.9rem; font-weight: 600; }
+    .cons-box h3 { color: #c0392b; margin-bottom: 10px; font-size: 0.9rem; font-weight: 600; }
+    .pros-box ul, .cons-box ul { padding-left: 18px; font-size: 0.88rem; line-height: 1.85; color: #444; }
+
+    /* QUIZ */
+    .quiz-intro {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin-bottom: 22px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .quiz-intro h2 { font-family: 'Merriweather', serif; font-size: 1.2rem; color: var(--dark); margin-bottom: 6px; }
+    .quiz-intro p { color: var(--mid-gray); font-size: 0.9rem; }
+
+    .quiz-card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 22px 26px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .quiz-card p { font-weight: 600; margin-bottom: 14px; color: var(--dark); font-size: 0.95rem; }
+
+    .quiz-card label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 7px;
+      border: 1px solid #e0e0e0;
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-size: 0.91rem;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .quiz-card label:hover { background: var(--pale-green); border-color: #b0d4ba; }
+    .quiz-card label.correct { background: #d4edda; border-color: #4a7c59; }
+    .quiz-card label.wrong   { background: #fde8e8; border-color: #c0392b; }
+
+    #submit-quiz {
+      display: block;
+      margin: 22px auto 0;
+      background: var(--green);
+      color: white;
+      border: none;
+      padding: 12px 34px;
+      border-radius: 7px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    #submit-quiz:hover { background: var(--green-hover); }
+
+    #quiz-result {
+      text-align: center;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--green);
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 8px;
+      background: var(--light-green);
+      display: none;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.8rem;
+      color: var(--mid-gray);
+      border-top: 1px solid #ddd;
+      margin-top: 40px;
+      background: var(--white);
+    }
+
+    footer p + p { margin-top: 6px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-tag">Science Research Project</div>
+  <h1>Stem Cell Technology</h1>
+  <p>Inaaya &amp; Chetana &nbsp;&bull;&nbsp; Topic: Stem Cells</p>
+</header>
+
+<!-- photo strip -->
+<div class="hero-strip">
+  <img src="https://images.unsplash.com/photo-1706204787318-d7de50772977?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHN0ZW0lMjBjZWxsc3xlbnwwfHwwfHx8MA%3D%3D" alt="Stem cells under microscope" onerror="this.style.background='#d4e8d9';this.removeAttribute('src')"/>
+  <img src="https://www.bdbiosciences.com/content/dam/bdb/discover-learn/research-areas/stem-cells/Embryonic-Stem-Cell-Differentiation.png" alt="Stem cell differentiation diagram" onerror="this.style.background='#c5ddc9';this.removeAttribute('src')"/>
+  <img src="https://www.ottawahospital.on.ca/wp-content/uploads/2025/06/NCD_Rendering_Exterior_Day.jpg" alt="Ottawa Hospital" onerror="this.style.background='#b8d4bd';this.removeAttribute('src')"/>
+</div>
+
+<nav>
+  <button class="active" onclick="showSection('partner1', this)">Partner 1 — How It Works</button>
+  <button onclick="showSection('partner2', this)">Partner 2 — Effects &amp; Impact</button>
+  <button onclick="showSection('quiz', this)">Quick Quiz</button>
+</nav>
+
+<main>
+
+  <!-- PARTNER 1 -->
+  <div id="partner1" class="section active">
+
+    <h2 class="section-heading">Partner 1 — Background Research</h2>
+
+    <div class="fun-fact">
+      <strong>Did you know?</strong> The human body contains over 200 different cell types, and stem cells have the potential to develop into almost any one of them.
+    </div>
+
+    <div class="card-with-img">
+      <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Stem_cell_division_and_differentiation.svg/1280px-Stem_cell_division_and_differentiation.svg.png" alt="Stem cell division and differentiation" onerror="this.style.display='none'"/>
+      <div class="img-caption">Diagram: How stem cells divide and differentiate into specialized cell types.</div>
+      <div class="card-img-body">
+        <div class="partner-label">Partner 1</div>
+        <h2>How the Technology Works</h2>
+        <p>Stem cells are special cells in the body that have not yet decided what they will become. Unlike regular cells, they can divide many times and turn into different types of cells, such as muscle cells, brain cells, or blood cells. This ability is called differentiation. There are two main types: embryonic stem cells, which come from early-stage embryos and can become almost any cell type, and adult stem cells, which are found in tissues like bone marrow and have a more limited range.</p>
+        <p>In therapy, scientists grow these cells in a lab, guide them into the right cell type, and then put them into the patient. The goal is for the new cells to take over the job of damaged or missing cells in the body. Researchers also use tools like CRISPR to edit stem cells before putting them back in, making treatments more targeted and effective.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="partner-label">Partner 1</div>
+      <h2>What the Patient Can Expect</h2>
+      <p>Before a stem cell transplant, most patients go through a preparation phase. This often includes chemotherapy or radiation to destroy unhealthy or damaged cells, making room for the new stem cells to grow. This stage can be hard on the body and may cause side effects like fatigue, nausea, and a weakened immune system.</p>
+      <p>After the transplant, patients are closely monitored in a hospital or clinic. Recovery can take weeks to months depending on the treatment type. Patients may need medications to prevent their immune system from attacking the new cells (a reaction called graft-versus-host disease). Over time, if the treatment is successful, the new cells begin to function properly and the patient's condition improves.</p>
+    </div>
+
+    <div class="card">
+      <div class="partner-label">Partner 1</div>
+      <h2>Why the Technology Is Being Used</h2>
+      <p>Stem cell technology is being used because it offers hope for diseases that currently have no permanent cure. Conditions like leukemia, multiple sclerosis, Type 1 diabetes, and Parkinson's disease involve the loss or malfunction of specific cells. Stem cells can potentially replace those damaged cells and restore normal function, which traditional medicine cannot always do.</p>
+      <p>Another reason is personalized medicine. Scientists can take a patient's own cells, reprogram them into stem cells (called iPSCs), and create treatments designed specifically for that individual. This lowers the risk of rejection and side effects. The technology is also used to test new drugs in the lab before trying them on humans, which speeds up research and improves safety.</p>
+    </div>
+
+    <div class="card">
+      <div class="partner-label">Partner 1</div>
+      <h2>How It Has Enhanced Our Understanding of Cells</h2>
+      <p>Stem cells have given scientists a way to watch how human cells develop in real time. Before this technology, researchers mostly had to study cells from animals or dead tissue. Now they can grow living human cells in a lab and observe exactly how they divide, specialize, and respond to disease or damage.</p>
+      <p>This has led to major discoveries about genetic diseases. By creating stem cells from patients with conditions like cystic fibrosis or ALS, scientists can study those diseases directly on living human tissue. It has also helped researchers understand how cancers develop, since some cancers appear to start from cells that behave like stem cells gone wrong.</p>
+    </div>
+
+    <div class="card">
+      <div class="partner-label">Partner 1 — Canadian Scientist</div>
+      <h2>Featured Scientist: Dr. Mick Bhatia</h2>
+      <div class="scientist-grid">
+        <img class="scientist-img" src="https://static.wixstatic.com/media/445313_7ebe35e753aa4b4483bf7bb161ca1dc3~mv2.jpg/v1/crop/x_188,y_1,w_589,h_527/fill/w_260,h_372,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/bhatia_mick_700x400.jpg" alt="Stem cell lab" onerror="this.style.background='#d4e8d9';this.removeAttribute('src')"/>
+        <div class="scientist-info">
+          <h3>Profile</h3>
+          <ul>
+            <li><strong>Country:</strong> Canada</li>
+            <li><strong>Education:</strong> University of Ottawa (B.Sc.), University of Toronto (Ph.D.)</li>
+            <li><strong>Current Position:</strong> Director, McMaster Stem Cell and Cancer Research Institute, Hamilton, Ontario</li>
+            <li><strong>Connection to Stem Cells:</strong> Dr. Bhatia's lab studies how stem cells turn into blood cells and how cancer stem cells drive tumor growth. He has developed lab methods for producing blood cells from stem cells and pioneered work converting human skin cells directly into blood cells — skipping the embryonic stage, which significantly reduces ethical concerns.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PARTNER 2 -->
+  <div id="partner2" class="section">
+
+    <h2 class="section-heading">Partner 2 — Effects &amp; Impact</h2>
+
+    <div class="fun-fact">
+      <strong>Key Fact:</strong> In Canada, stem cell transplants have been used to treat over 20 different diseases, with the Ottawa Hospital being one of the leading centers for this research.
+    </div>
+
+    <div class="card-with-img">
+      <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Stem_cells_025.jpg/1280px-Stem_cells_025.jpg" alt="Stem cells under fluorescence microscope" onerror="this.style.display='none'"/>
+      <div class="img-caption">Stem cells imaged under a fluorescence microscope during laboratory research.</div>
+      <div class="card-img-body">
+        <div class="partner-label">Partner 2</div>
+        <h2>Effects on the Human Body</h2>
+        <p>Stem cells are important for repairing and replacing damaged tissues. In patients with heart disease, stem cells can be injected into injured areas of the heart to help grow new heart muscle and improve function after a heart attack. One of the most well-known uses is bone marrow (hematopoietic) stem cell transplants for diseases like leukemia, where patients first undergo chemotherapy and then receive healthy stem cells to rebuild their blood and immune system.</p>
+        <p>Stem cells also release chemical signals that reduce swelling, help new blood vessels form, and speed up tissue repair. In Canada, treatments often use a patient's own cells or carefully matched donor cells to reduce the risk of rejection. However, risks still exist, including immune rejection, uncontrolled cell growth, and in rare cases, tumor formation.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="partner-label">Partner 2</div>
+      <h2>Pros and Cons of the Technology</h2>
+      <div class="two-col">
+        <div class="pros-box">
+          <h3>Advantages</h3>
+          <ul>
+            <li>Can repair or replace damaged tissues</li>
+            <li>May cure diseases with no current treatment</li>
+            <li>Patient's own cells reduce rejection risk</li>
+            <li>Treats leukemia, MS, and heart damage</li>
+            <li>Valuable in drug testing and research</li>
+          </ul>
+        </div>
+        <div class="cons-box">
+          <h3>Disadvantages</h3>
+          <ul>
+            <li>High cost; many treatments experimental</li>
+            <li>Donor cells may be rejected</li>
+            <li>Rare risk of tumor formation</li>
+            <li>Ethical concerns over embryonic stem cells</li>
+            <li>Long-term effects still being studied</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top:18px;">Looking ahead, stem cells could play a major role in personalized medicine and even lab-grown organ transplants. But because the technology is still developing, ongoing research and regulation are needed to ensure safety and fairness for all patients.</p>
+    </div>
+
+    <div class="card">
+      <div class="partner-label">Partner 2</div>
+      <h2>Environmental Impacts</h2>
+      <p>Stem cell research and production have real environmental costs. Labs use large amounts of single-use plastics (pipettes, flasks, test tubes) to maintain sterile conditions, creating significant waste. Energy use is also high, since stem cells must be grown in controlled clean rooms with cold storage and specialized equipment. Transporting cells requires cold-chain shipping, which adds to greenhouse gas emissions.</p>
+      <p>During clinical treatments, hospitals generate medical waste from sterile supplies like gowns, IV bags, and syringes. Leftover biological materials must be safely destroyed through incineration. On the positive side, many labs are adopting greener practices, such as closed production systems (which can cut emissions by about 50%), recyclable packaging, and energy-efficient equipment. STEMCELL Technologies, a Canadian company, is actively working to lower its carbon footprint.</p>
+    </div>
+
+    <div class="card">
+      <div class="partner-label">Partner 2</div>
+      <h2>Moral and Ethical Issues</h2>
+      <p>The biggest ethical concern in stem cell technology is the use of embryonic stem cells, since obtaining them involves destroying an embryo. In Canada, strict regulations allow only leftover IVF embryos to be used, and full donor consent is required. To avoid this issue, most modern treatments now use adult stem cells or induced pluripotent stem cells (iPSCs), which do not involve embryos.</p>
+      <p>Consent and equal access are also important issues. Since treatments are expensive and mainly available at specialized hospitals, not everyone has equal access. Canadians are also warned against "stem cell tourism," where people travel abroad for unproven and potentially dangerous treatments. Overall, Canadian research follows strict ethical guidelines to ensure the technology helps people responsibly.</p>
+    </div>
+
+    <div class="card">
+      <div class="partner-label">Partner 2 — Canadian Scientist</div>
+      <h2>Featured Scientist: Dr. Harold Atkins</h2>
+      <div class="scientist-grid">
+        <img class="scientist-img" src="https://www.cca-reports.ca/wp-content/uploads/2019/10/Harold-Atkins-731x1024.jpg" alt="The Ottawa Hospital campus" onerror="this.style.background='#d4e8d9';this.removeAttribute('src')"/>
+        <div class="scientist-info">
+          <h3>Profile</h3>
+          <ul>
+            <li><strong>From:</strong> Ottawa, Ontario, Canada</li>
+            <li><strong>Education:</strong> University of Ottawa (B.Med.Sc. &amp; M.D.); specialized training at U of Ottawa, University of Washington, and Ontario Cancer Institute</li>
+            <li><strong>Current Position:</strong> Ottawa Hospital, Transplant and Cell Therapy Program; Senior Clinician Investigator, Ottawa Hospital Research Institute</li>
+            <li><strong>Connection to Stem Cells:</strong> Dr. Atkins specializes in hematopoietic stem cell transplants used to rebuild a patient's immune system after disease or chemotherapy. He treats patients with leukemia and multiple sclerosis, conducts clinical trials, and monitors outcomes to improve the safety and effectiveness of stem cell therapies.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz" class="section">
+
+    <h2 class="section-heading">Quick Knowledge Check</h2>
+
+    <div class="quiz-intro">
+      <h2>Test What You Learned</h2>
+      <p>Select the best answer for each question below, then click Submit to see your score.</p>
+    </div>
+
+    <div class="quiz-card">
+      <p>1. What makes stem cells different from other cells in the body?</p>
+      <label><input type="radio" name="q1" value="a"> They only exist in the brain.</label>
+      <label><input type="radio" name="q1" value="b"> They can divide and turn into many different cell types.</label>
+      <label><input type="radio" name="q1" value="c"> They cannot reproduce at all.</label>
+      <label><input type="radio" name="q1" value="d"> They are only found in plants.</label>
+    </div>
+
+    <div class="quiz-card">
+      <p>2. What is one major ethical concern about embryonic stem cells?</p>
+      <label><input type="radio" name="q2" value="a"> They are too expensive to study.</label>
+      <label><input type="radio" name="q2" value="b"> They do not work in humans.</label>
+      <label><input type="radio" name="q2" value="c"> Obtaining them involves destroying an embryo.</label>
+      <label><input type="radio" name="q2" value="d"> They can only be used in Canada.</label>
+    </div>
+
+    <div class="quiz-card">
+      <p>3. What does "differentiation" mean in stem cell biology?</p>
+      <label><input type="radio" name="q3" value="a"> A stem cell dying off.</label>
+      <label><input type="radio" name="q3" value="b"> A stem cell becoming a specialized cell type.</label>
+      <label><input type="radio" name="q3" value="c"> A stem cell moving through the bloodstream.</label>
+      <label><input type="radio" name="q3" value="d"> Two stem cells combining together.</label>
+    </div>
+
+    <div class="quiz-card">
+      <p>4. Which Canadian hospital is a leading center for stem cell transplants?</p>
+      <label><input type="radio" name="q4" value="a"> Toronto General Hospital</label>
+      <label><input type="radio" name="q4" value="b"> Vancouver General Hospital</label>
+      <label><input type="radio" name="q4" value="c"> The Ottawa Hospital</label>
+      <label><input type="radio" name="q4" value="d"> Montreal Children's Hospital</label>
+    </div>
+
+    <button id="submit-quiz" onclick="checkQuiz()">Submit Answers</button>
+    <p id="quiz-result"></p>
+
+  </div>
+
+</main>
+
+<footer>
+  <p><strong>Stem Cell Technology</strong> — Science Research Project</p>
+  <p>Inaaya K. &amp; Chetana &nbsp;|&nbsp; Sources: Mayo Clinic, NIH, Stem Cell Network Canada, Ottawa Hospital Foundation, STEMCELL Technologies</p>
+  <p style="margin-top:8px; font-size:0.72rem;"> </p>
+</footer>
+
+<script>
+  function showSection(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  const answers = { q1: 'b', q2: 'c', q3: 'b', q4: 'c' };
+
+  function checkQuiz() {
+    document.querySelectorAll('.quiz-card label').forEach(l => l.classList.remove('correct', 'wrong'));
+    let score = 0;
+    for (const [q, correct] of Object.entries(answers)) {
+      const selected = document.querySelector(`input[name="${q}"]:checked`);
+      if (!selected) continue;
+      if (selected.value === correct) {
+        selected.parentElement.classList.add('correct');
+        score++;
+      } else {
+        selected.parentElement.classList.add('wrong');
+        document.querySelectorAll(`input[name="${q}"]`).forEach(inp => {
+          if (inp.value === correct) inp.parentElement.classList.add('correct');
+        });
+      }
+    }
+    const result = document.getElementById('quiz-result');
+    result.style.display = 'block';
+    if (score === 4) result.textContent = 'Perfect — 4/4! Great work.';
+    else if (score >= 2) result.textContent = `Good effort! You got ${score} out of 4 correct.`;
+    else result.textContent = `You got ${score}/4. Review the sections and try again!`;
+  }
+</script>
+
+</body>
+</html>
