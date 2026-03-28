@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light" data-lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Stem Cells - Science Research Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
+    /* ─── LIGHT THEME ───────────────────────────────────── */
     :root {
       --green: #4a7c59;
       --green-hover: #3a6347;
@@ -16,20 +17,66 @@
       --dark: #2c3e2d;
       --mid-gray: #666;
       --border: #e0e0e0;
+      --bg: #f0f7f2;
+      --card-bg: #ffffff;
+      --text: #2c3e2d;
+      --text-secondary: #444;
+      --nav-bg: #2c3e2d;
+      --nav-text: #cde8d4;
+      --fun-fact-bg: linear-gradient(to right, #d4e8d9, #e8f5ec);
+      --pros-bg: #e8f5ec;
+      --cons-bg: #fdf0f0;
+      --quiz-bg: #ffffff;
+      --input-border: #e0e0e0;
+      --shadow: rgba(0,0,0,0.06);
+      --footer-bg: #ffffff;
+      --toggle-bg: #d4e8d9;
+      --toggle-knob: #4a7c59;
+      --header-overlay: rgba(0,0,0,0.55);
+    }
+
+    /* ─── DARK THEME ────────────────────────────────────── */
+    [data-theme="dark"] {
+      --green: #6abf82;
+      --green-hover: #55a86b;
+      --light-green: #1f3d2b;
+      --pale-green: #111c14;
+      --white: #1e2d22;
+      --gray: #192419;
+      --dark: #e4f0e6;
+      --mid-gray: #a0b8a5;
+      --border: #2e4533;
+      --bg: #0f1a11;
+      --card-bg: #1a2d1e;
+      --text: #dff0e2;
+      --text-secondary: #b0cbb5;
+      --nav-bg: #0d1810;
+      --nav-text: #9ecfa8;
+      --fun-fact-bg: linear-gradient(to right, #1a3326, #1e3c2a);
+      --pros-bg: #162b1e;
+      --cons-bg: #2b1616;
+      --quiz-bg: #1a2d1e;
+      --input-border: #2e4533;
+      --shadow: rgba(0,0,0,0.35);
+      --footer-bg: #0d1810;
+      --toggle-bg: #1f3d2b;
+      --toggle-knob: #6abf82;
+      --header-overlay: rgba(0,0,0,0.72);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Source Sans 3', sans-serif;
-      background-color: var(--pale-green);
-      color: var(--dark);
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background-color 0.35s, color 0.35s;
     }
 
-    /* HEADER */
+    /* ─── HEADER ─────────────────────────────────────────── */
     header {
       background: linear-gradient(135deg, #2c3e2d 0%, #4a7c59 100%);
-      color: var(--white);
+      color: #fff;
       padding: 56px 24px 44px;
       text-align: center;
       position: relative;
@@ -68,7 +115,7 @@
 
     header p { font-size: 1rem; opacity: 0.85; }
 
-    /* HERO STRIP */
+    /* ─── HERO STRIP ─────────────────────────────────────── */
     .hero-strip {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -77,15 +124,83 @@
     }
 
     .hero-strip img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
     }
 
-    /* NAV */
+    /* ─── CONTROLS BAR (dark/light + language) ───────────── */
+    .controls-bar {
+      background-color: var(--nav-bg);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 14px;
+      padding: 8px 20px;
+      transition: background-color 0.35s;
+    }
+
+    /* Language toggle */
+    .lang-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--nav-text);
+      padding: 5px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .lang-btn:hover, .lang-btn.active {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+
+    /* Dark/Light toggle */
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .theme-toggle-label {
+      font-size: 0.78rem;
+      color: var(--nav-text);
+      user-select: none;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+    }
+
+    .toggle-track {
+      width: 44px; height: 24px;
+      background: var(--toggle-bg);
+      border-radius: 12px;
+      position: relative;
+      transition: background 0.3s;
+      border: 1px solid var(--border);
+    }
+
+    .toggle-knob {
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 16px; height: 16px;
+      background: var(--toggle-knob);
+      border-radius: 50%;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    [data-theme="dark"] .toggle-knob { transform: translateX(20px); }
+
+    .toggle-icon { font-size: 0.9rem; }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
     nav {
-      background-color: var(--dark);
+      background-color: var(--nav-bg);
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -95,12 +210,13 @@
       top: 0;
       z-index: 100;
       box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+      transition: background-color 0.35s;
     }
 
     nav button {
       background: none;
       border: 1px solid rgba(255,255,255,0.25);
-      color: #cde8d4;
+      color: var(--nav-text);
       padding: 9px 20px;
       border-radius: 5px;
       cursor: pointer;
@@ -115,7 +231,7 @@
       border-color: var(--green);
     }
 
-    /* MAIN */
+    /* ─── MAIN ────────────────────────────────────────────── */
     main {
       max-width: 920px;
       margin: 40px auto;
@@ -132,16 +248,18 @@
       margin-bottom: 24px;
       padding-bottom: 10px;
       border-bottom: 2px solid var(--light-green);
+      transition: color 0.35s, border-color 0.35s;
     }
 
-    /* CARDS */
+    /* ─── CARDS ───────────────────────────────────────────── */
     .card {
-      background: var(--white);
+      background: var(--card-bg);
       border-radius: 10px;
       padding: 28px 30px;
       margin-bottom: 24px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 12px var(--shadow);
       border: 1px solid var(--border);
+      transition: background 0.35s, border-color 0.35s, box-shadow 0.35s;
     }
 
     .card h2 {
@@ -157,32 +275,27 @@
     .card h2::before {
       content: '';
       display: inline-block;
-      width: 4px;
-      height: 18px;
+      width: 4px; height: 18px;
       background: var(--green);
       border-radius: 2px;
       flex-shrink: 0;
     }
 
-    .card p { line-height: 1.8; color: #444; font-size: 0.96rem; }
+    .card p { line-height: 1.8; color: var(--text-secondary); font-size: 0.96rem; }
     .card p + p { margin-top: 12px; }
 
-    /* IMAGE CARD */
+    /* ─── IMAGE CARD ──────────────────────────────────────── */
     .card-with-img {
-      background: var(--white);
+      background: var(--card-bg);
       border-radius: 10px;
       margin-bottom: 24px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 12px var(--shadow);
       border: 1px solid var(--border);
       overflow: hidden;
+      transition: background 0.35s, border-color 0.35s;
     }
 
-    .card-img-top {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      display: block;
-    }
+    .card-img-top { width: 100%; height: 220px; object-fit: cover; display: block; }
 
     .img-caption {
       font-size: 0.75rem;
@@ -192,6 +305,7 @@
       background: var(--gray);
       border-bottom: 1px solid var(--border);
       font-style: italic;
+      transition: background 0.35s, color 0.35s;
     }
 
     .card-img-body { padding: 26px 30px; }
@@ -209,17 +323,16 @@
     .card-img-body h2::before {
       content: '';
       display: inline-block;
-      width: 4px;
-      height: 18px;
+      width: 4px; height: 18px;
       background: var(--green);
       border-radius: 2px;
       flex-shrink: 0;
     }
 
-    .card-img-body p { line-height: 1.8; color: #444; font-size: 0.96rem; }
+    .card-img-body p { line-height: 1.8; color: var(--text-secondary); font-size: 0.96rem; }
     .card-img-body p + p { margin-top: 12px; }
 
-    /* PARTNER LABEL */
+    /* ─── PARTNER LABEL ───────────────────────────────────── */
     .partner-label {
       display: inline-block;
       background-color: var(--light-green);
@@ -231,9 +344,10 @@
       margin-bottom: 14px;
       text-transform: uppercase;
       letter-spacing: 0.6px;
+      transition: background 0.35s, color 0.35s;
     }
 
-    /* SCIENTIST BOX */
+    /* ─── SCIENTIST BOX ───────────────────────────────────── */
     .scientist-grid {
       display: grid;
       grid-template-columns: 190px 1fr;
@@ -243,71 +357,74 @@
       border-radius: 8px;
       overflow: hidden;
       border: 1px solid var(--border);
+      transition: background 0.35s, border-color 0.35s;
     }
 
     @media (max-width: 600px) { .scientist-grid { grid-template-columns: 1fr; } }
 
     .scientist-img { width: 100%; height: 100%; object-fit: cover; min-height: 170px; display: block; }
-
     .scientist-info { padding: 20px; }
 
     .scientist-info h3 {
       font-family: 'Merriweather', serif;
       font-size: 0.95rem;
-      color: var(--dark);
+      color: var(--text);
       margin-bottom: 10px;
     }
 
-    .scientist-info ul { padding-left: 18px; line-height: 1.85; color: #444; font-size: 0.9rem; }
+    .scientist-info ul { padding-left: 18px; line-height: 1.85; color: var(--text-secondary); font-size: 0.9rem; }
 
-    /* FUN FACT */
+    /* ─── FUN FACT ────────────────────────────────────────── */
     .fun-fact {
-      background: linear-gradient(to right, var(--light-green), #e8f5ec);
+      background: var(--fun-fact-bg);
       border-radius: 8px;
       padding: 16px 22px;
       margin-bottom: 24px;
       font-size: 0.92rem;
-      color: var(--dark);
+      color: var(--text);
       border-left: 4px solid var(--green);
+      transition: background 0.35s, color 0.35s;
     }
 
     .fun-fact strong { color: var(--green); }
 
-    /* PROS / CONS */
+    /* ─── PROS / CONS ─────────────────────────────────────── */
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 14px; }
     @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
 
-    .pros-box, .cons-box { border-radius: 8px; padding: 18px 20px; }
-    .pros-box { background: #e8f5ec; border-top: 3px solid var(--green); }
-    .cons-box { background: #fdf0f0; border-top: 3px solid #c0392b; }
+    .pros-box, .cons-box { border-radius: 8px; padding: 18px 20px; transition: background 0.35s; }
+    .pros-box { background: var(--pros-bg); border-top: 3px solid var(--green); }
+    .cons-box { background: var(--cons-bg); border-top: 3px solid #c0392b; }
 
     .pros-box h3 { color: var(--green); margin-bottom: 10px; font-size: 0.9rem; font-weight: 600; }
-    .cons-box h3 { color: #c0392b; margin-bottom: 10px; font-size: 0.9rem; font-weight: 600; }
-    .pros-box ul, .cons-box ul { padding-left: 18px; font-size: 0.88rem; line-height: 1.85; color: #444; }
+    .cons-box h3 { color: #e05c5c; margin-bottom: 10px; font-size: 0.9rem; font-weight: 600; }
+    .pros-box ul, .cons-box ul { padding-left: 18px; font-size: 0.88rem; line-height: 1.85; color: var(--text-secondary); }
 
-    /* QUIZ */
+    /* ─── QUIZ ────────────────────────────────────────────── */
     .quiz-intro {
-      background: var(--white);
+      background: var(--card-bg);
       border-radius: 10px;
       padding: 24px 28px;
       margin-bottom: 22px;
       border: 1px solid var(--border);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 12px var(--shadow);
+      transition: background 0.35s, border-color 0.35s;
     }
 
-    .quiz-intro h2 { font-family: 'Merriweather', serif; font-size: 1.2rem; color: var(--dark); margin-bottom: 6px; }
+    .quiz-intro h2 { font-family: 'Merriweather', serif; font-size: 1.2rem; color: var(--text); margin-bottom: 6px; }
     .quiz-intro p { color: var(--mid-gray); font-size: 0.9rem; }
 
     .quiz-card {
-      background: var(--white);
+      background: var(--card-bg);
       border-radius: 10px;
       padding: 22px 26px;
       margin-bottom: 16px;
       border: 1px solid var(--border);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 8px var(--shadow);
+      transition: background 0.35s, border-color 0.35s;
     }
 
-    .quiz-card p { font-weight: 600; margin-bottom: 14px; color: var(--dark); font-size: 0.95rem; }
+    .quiz-card p { font-weight: 600; margin-bottom: 14px; color: var(--text); font-size: 0.95rem; }
 
     .quiz-card label {
       display: flex;
@@ -315,16 +432,17 @@
       gap: 10px;
       padding: 10px 14px;
       border-radius: 7px;
-      border: 1px solid #e0e0e0;
+      border: 1px solid var(--input-border);
       margin-bottom: 8px;
       cursor: pointer;
       font-size: 0.91rem;
+      color: var(--text-secondary);
       transition: background 0.15s, border-color 0.15s;
     }
 
     .quiz-card label:hover { background: var(--pale-green); border-color: #b0d4ba; }
-    .quiz-card label.correct { background: #d4edda; border-color: #4a7c59; }
-    .quiz-card label.wrong   { background: #fde8e8; border-color: #c0392b; }
+    .quiz-card label.correct { background: var(--pros-bg); border-color: var(--green); }
+    .quiz-card label.wrong   { background: var(--cons-bg); border-color: #c0392b; }
 
     #submit-quiz {
       display: block;
@@ -355,15 +473,16 @@
       display: none;
     }
 
-    /* FOOTER */
+    /* ─── FOOTER ──────────────────────────────────────────── */
     footer {
       text-align: center;
       padding: 30px 20px;
       font-size: 0.8rem;
       color: var(--mid-gray);
-      border-top: 1px solid #ddd;
+      border-top: 1px solid var(--border);
       margin-top: 40px;
-      background: var(--white);
+      background: var(--footer-bg);
+      transition: background 0.35s, border-color 0.35s;
     }
 
     footer p + p { margin-top: 6px; }
@@ -372,79 +491,91 @@
 <body>
 
 <header>
-  <div class="header-tag">Science Research Project</div>
-  <h1>Stem Cell Technology</h1>
-  <p>Inaaya &amp; Chetana &nbsp;&bull;&nbsp; Topic: Stem Cells</p>
+  <div class="header-tag" data-i18n="header-tag">Science Research Project</div>
+  <h1 data-i18n="header-h1">Stem Cell Technology</h1>
+  <p data-i18n="header-sub">Inaaya &amp; Chetana &nbsp;&bull;&nbsp; Topic: Stem Cells</p>
 </header>
 
-<!-- photo strip -->
 <div class="hero-strip">
   <img src="https://images.unsplash.com/photo-1706204787318-d7de50772977?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHN0ZW0lMjBjZWxsc3xlbnwwfHwwfHx8MA%3D%3D" alt="Stem cells under microscope" onerror="this.style.background='#d4e8d9';this.removeAttribute('src')"/>
   <img src="https://www.bdbiosciences.com/content/dam/bdb/discover-learn/research-areas/stem-cells/Embryonic-Stem-Cell-Differentiation.png" alt="Stem cell differentiation diagram" onerror="this.style.background='#c5ddc9';this.removeAttribute('src')"/>
   <img src="https://www.ottawahospital.on.ca/wp-content/uploads/2025/06/NCD_Rendering_Exterior_Day.jpg" alt="Ottawa Hospital" onerror="this.style.background='#b8d4bd';this.removeAttribute('src')"/>
 </div>
 
+<!-- ─── CONTROLS BAR ─────────────────────────────────── -->
+<div class="controls-bar">
+  <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" id="btn-fr" onclick="setLang('fr')">FR</button>
+
+  <div class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">
+    <span class="toggle-icon">☀️</span>
+    <div class="toggle-track"><div class="toggle-knob"></div></div>
+    <span class="toggle-icon">🌙</span>
+    <span class="theme-toggle-label" id="theme-label">Light Mode</span>
+  </div>
+</div>
+
 <nav>
-  <button class="active" onclick="showSection('partner1', this)">Partner 1 — How It Works</button>
-  <button onclick="showSection('partner2', this)">Partner 2 — Effects &amp; Impact</button>
-  <button onclick="showSection('quiz', this)">Quick Quiz</button>
+  <button class="active" id="nav-p1" onclick="showSection('partner1', this)" data-i18n="nav-p1">Partner 1 — How It Works</button>
+  <button id="nav-p2" onclick="showSection('partner2', this)" data-i18n="nav-p2">Partner 2 — Effects &amp; Impact</button>
+  <button id="nav-quiz" onclick="showSection('quiz', this)" data-i18n="nav-quiz">Quick Quiz</button>
 </nav>
 
 <main>
 
-  <!-- PARTNER 1 -->
+  <!-- ─── PARTNER 1 ──────────────────────────────────────── -->
   <div id="partner1" class="section active">
 
-    <h2 class="section-heading">Partner 1 — Background Research</h2>
+    <h2 class="section-heading" data-i18n="p1-heading">Partner 1 — Background Research</h2>
 
     <div class="fun-fact">
-      <strong>Did you know?</strong> The human body contains over 200 different cell types, and stem cells have the potential to develop into almost any one of them.
+      <strong data-i18n="did-you-know">Did you know?</strong> <span data-i18n="fact1">The human body contains over 200 different cell types, and stem cells have the potential to develop into almost any one of them.</span>
     </div>
 
     <div class="card-with-img">
       <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Stem_cell_division_and_differentiation.svg/1280px-Stem_cell_division_and_differentiation.svg.png" alt="Stem cell division and differentiation" onerror="this.style.display='none'"/>
-      <div class="img-caption">Diagram: How stem cells divide and differentiate into specialized cell types.</div>
+      <div class="img-caption" data-i18n="img-cap1">Diagram: How stem cells divide and differentiate into specialized cell types.</div>
       <div class="card-img-body">
-        <div class="partner-label">Partner 1</div>
-        <h2>How the Technology Works</h2>
-        <p>Stem cells are special cells in the body that have not yet decided what they will become. Unlike regular cells, they can divide many times and turn into different types of cells, such as muscle cells, brain cells, or blood cells. This ability is called differentiation. There are two main types: embryonic stem cells, which come from early-stage embryos and can become almost any cell type, and adult stem cells, which are found in tissues like bone marrow and have a more limited range.</p>
-        <p>In therapy, scientists grow these cells in a lab, guide them into the right cell type, and then put them into the patient. The goal is for the new cells to take over the job of damaged or missing cells in the body. Researchers also use tools like CRISPR to edit stem cells before putting them back in, making treatments more targeted and effective.</p>
+        <div class="partner-label" data-i18n="label-p1">Partner 1</div>
+        <h2 data-i18n="how-works-title">How the Technology Works</h2>
+        <p data-i18n="how-works-p1">Stem cells are unique cells in the body that haven't specialized yet. Unlike regular cells, they can keep dividing and turn into different types, like muscle, brain, or blood cells. This process is called differentiation. There are two main types: embryonic stem cells, which come from very early embryos and can become almost any type of cell, and adult stem cells, which are found in tissues like bone marrow and can only become certain types.</p>
+        <p data-i18n="how-works-p2">In therapy, scientists grow stem cells in a lab, guide them to become the right type, and then put them into patients. The goal is for these cells to replace damaged or missing cells. Researchers can also use tools like CRISPR to edit stem cells before giving them to patients, making the treatment more precise and effective.</p>
       </div>
     </div>
 
     <div class="card">
-      <div class="partner-label">Partner 1</div>
-      <h2>What the Patient Can Expect</h2>
-      <p>Before a stem cell transplant, most patients go through a preparation phase. This often includes chemotherapy or radiation to destroy unhealthy or damaged cells, making room for the new stem cells to grow. This stage can be hard on the body and may cause side effects like fatigue, nausea, and a weakened immune system.</p>
-      <p>After the transplant, patients are closely monitored in a hospital or clinic. Recovery can take weeks to months depending on the treatment type. Patients may need medications to prevent their immune system from attacking the new cells (a reaction called graft-versus-host disease). Over time, if the treatment is successful, the new cells begin to function properly and the patient's condition improves.</p>
+      <div class="partner-label" data-i18n="label-p1">Partner 1</div>
+      <h2 data-i18n="patient-title">What the Patient Can Expect</h2>
+      <p data-i18n="patient-p1">Before a stem cell transplant, most patients go through a preparation phase. This usually involves chemotherapy or radiation to get rid of damaged or unhealthy cells and make space for the new stem cells. This part can be tough on the body and cause side effects like tiredness, nausea, and a weaker immune system.</p>
+      <p data-i18n="patient-p2">After the transplant, patients are closely watched in a hospital or clinic. Recovery can take anywhere from a few weeks to a few months, depending on the treatment. Patients often need medicine to stop their immune system from attacking the new cells, which is called graft-versus-host disease. If everything goes well, the new stem cells start working properly and the patient's health improves.</p>
     </div>
 
     <div class="card">
-      <div class="partner-label">Partner 1</div>
-      <h2>Why the Technology Is Being Used</h2>
-      <p>Stem cell technology is being used because it offers hope for diseases that currently have no permanent cure. Conditions like leukemia, multiple sclerosis, Type 1 diabetes, and Parkinson's disease involve the loss or malfunction of specific cells. Stem cells can potentially replace those damaged cells and restore normal function, which traditional medicine cannot always do.</p>
-      <p>Another reason is personalized medicine. Scientists can take a patient's own cells, reprogram them into stem cells (called iPSCs), and create treatments designed specifically for that individual. This lowers the risk of rejection and side effects. The technology is also used to test new drugs in the lab before trying them on humans, which speeds up research and improves safety.</p>
+      <div class="partner-label" data-i18n="label-p1">Partner 1</div>
+      <h2 data-i18n="why-title">Why the Technology Is Being Used</h2>
+      <p data-i18n="why-p1">Stem cell technology is being used because it offers hope for diseases that currently have no permanent cure. Conditions like leukemia, multiple sclerosis, Type 1 diabetes, and Parkinson's disease involve the loss or malfunction of specific cells. Stem cells can potentially replace those damaged cells and restore normal function, which traditional medicine cannot always do.</p>
+      <p data-i18n="why-p2">Another reason is personalized medicine. Scientists can take a patient's own cells, reprogram them into stem cells (called iPSCs), and create treatments designed specifically for that individual. This lowers the risk of rejection and side effects. The technology is also used to test new drugs in the lab before trying them on humans, which speeds up research and improves safety.</p>
     </div>
 
     <div class="card">
-      <div class="partner-label">Partner 1</div>
-      <h2>How It Has Enhanced Our Understanding of Cells</h2>
-      <p>Stem cells have given scientists a way to watch how human cells develop in real time. Before this technology, researchers mostly had to study cells from animals or dead tissue. Now they can grow living human cells in a lab and observe exactly how they divide, specialize, and respond to disease or damage.</p>
-      <p>This has led to major discoveries about genetic diseases. By creating stem cells from patients with conditions like cystic fibrosis or ALS, scientists can study those diseases directly on living human tissue. It has also helped researchers understand how cancers develop, since some cancers appear to start from cells that behave like stem cells gone wrong.</p>
+      <div class="partner-label" data-i18n="label-p1">Partner 1</div>
+      <h2 data-i18n="understanding-title">How It Has Enhanced Our Understanding of Cells</h2>
+      <p data-i18n="understanding-p1">Stem cells have given scientists a way to watch how human cells develop in real time. Before this technology, researchers mostly had to study cells from animals or dead tissue. Now they can grow living human cells in a lab and observe exactly how they divide, specialize, and respond to disease or damage.</p>
+      <p data-i18n="understanding-p2">This has led to major discoveries about genetic diseases. By creating stem cells from patients with conditions like cystic fibrosis or ALS, scientists can study those diseases directly on living human tissue. It has also helped researchers understand how cancers develop, since some cancers appear to start from cells that behave like stem cells gone wrong.</p>
     </div>
 
     <div class="card">
-      <div class="partner-label">Partner 1 — Canadian Scientist</div>
-      <h2>Featured Scientist: Dr. Mick Bhatia</h2>
+      <div class="partner-label" data-i18n="label-p1-sci">Partner 1 — Canadian Scientist</div>
+      <h2 data-i18n="sci1-title">Featured Scientist: Dr. Mick Bhatia</h2>
       <div class="scientist-grid">
-        <img class="scientist-img" src="https://static.wixstatic.com/media/445313_7ebe35e753aa4b4483bf7bb161ca1dc3~mv2.jpg/v1/crop/x_188,y_1,w_589,h_527/fill/w_260,h_372,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/bhatia_mick_700x400.jpg" alt="Stem cell lab" onerror="this.style.background='#d4e8d9';this.removeAttribute('src')"/>
+        <img class="scientist-img" src="https://static.wixstatic.com/media/445313_7ebe35e753aa4b4483bf7bb161ca1dc3~mv2.jpg/v1/crop/x_188,y_1,w_589,h_527/fill/w_260,h_372,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/bhatia_mick_700x400.jpg" alt="Dr. Mick Bhatia" onerror="this.style.background='#d4e8d9';this.removeAttribute('src')"/>
         <div class="scientist-info">
-          <h3>Profile</h3>
+          <h3 data-i18n="profile">Profile</h3>
           <ul>
-            <li><strong>Country:</strong> Canada</li>
-            <li><strong>Education:</strong> University of Ottawa (B.Sc.), University of Toronto (Ph.D.)</li>
-            <li><strong>Current Position:</strong> Director, McMaster Stem Cell and Cancer Research Institute, Hamilton, Ontario</li>
-            <li><strong>Connection to Stem Cells:</strong> Dr. Bhatia's lab studies how stem cells turn into blood cells and how cancer stem cells drive tumor growth. He has developed lab methods for producing blood cells from stem cells and pioneered work converting human skin cells directly into blood cells — skipping the embryonic stage, which significantly reduces ethical concerns.</li>
+            <li><strong data-i18n="country">Country:</strong> <span data-i18n="sci1-country">Canada</span></li>
+            <li><strong data-i18n="education">Education:</strong> <span data-i18n="sci1-edu">University of Ottawa (B.Sc.), University of Toronto (Ph.D.)</span></li>
+            <li><strong data-i18n="position">Current Position:</strong> <span data-i18n="sci1-pos">Director, McMaster Stem Cell and Cancer Research Institute, Hamilton, Ontario</span></li>
+            <li><strong data-i18n="connection">Connection to Stem Cells:</strong> <span data-i18n="sci1-conn">Dr. Bhatia's lab studies how stem cells turn into blood cells and how cancer stem cells drive tumor growth. He has developed lab methods for producing blood cells from stem cells and pioneered work converting human skin cells directly into blood cells — skipping the embryonic stage, which significantly reduces ethical concerns.</span></li>
           </ul>
         </div>
       </div>
@@ -452,80 +583,80 @@
 
   </div>
 
-  <!-- PARTNER 2 -->
+  <!-- ─── PARTNER 2 ──────────────────────────────────────── -->
   <div id="partner2" class="section">
 
-    <h2 class="section-heading">Partner 2 — Effects &amp; Impact</h2>
+    <h2 class="section-heading" data-i18n="p2-heading">Partner 2 — Effects &amp; Impact</h2>
 
     <div class="fun-fact">
-      <strong>Key Fact:</strong> In Canada, stem cell transplants have been used to treat over 20 different diseases, with the Ottawa Hospital being one of the leading centers for this research.
+      <strong data-i18n="key-fact">Key Fact:</strong> <span data-i18n="fact2">In Canada, stem cell transplants have been used to treat over 20 different diseases, with the Ottawa Hospital being one of the leading centers for this research.</span>
     </div>
 
     <div class="card-with-img">
       <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Stem_cells_025.jpg/1280px-Stem_cells_025.jpg" alt="Stem cells under fluorescence microscope" onerror="this.style.display='none'"/>
-      <div class="img-caption">Stem cells imaged under a fluorescence microscope during laboratory research.</div>
+      <div class="img-caption" data-i18n="img-cap2">Stem cells imaged under a fluorescence microscope during laboratory research.</div>
       <div class="card-img-body">
-        <div class="partner-label">Partner 2</div>
-        <h2>Effects on the Human Body</h2>
-        <p>Stem cells are important for repairing and replacing damaged tissues. In patients with heart disease, stem cells can be injected into injured areas of the heart to help grow new heart muscle and improve function after a heart attack. One of the most well-known uses is bone marrow (hematopoietic) stem cell transplants for diseases like leukemia, where patients first undergo chemotherapy and then receive healthy stem cells to rebuild their blood and immune system.</p>
-        <p>Stem cells also release chemical signals that reduce swelling, help new blood vessels form, and speed up tissue repair. In Canada, treatments often use a patient's own cells or carefully matched donor cells to reduce the risk of rejection. However, risks still exist, including immune rejection, uncontrolled cell growth, and in rare cases, tumor formation.</p>
+        <div class="partner-label" data-i18n="label-p2">Partner 2</div>
+        <h2 data-i18n="effects-title">Effects on the Human Body</h2>
+        <p data-i18n="effects-p1">Stem cells are really important because they can help repair or replace damaged parts of the body. For example, in people with heart problems, doctors can inject stem cells into damaged areas of the heart to help grow new heart muscle and make the heart work better after a heart attack. A common use of stem cells is in bone marrow transplants for diseases like leukemia. Patients usually get chemotherapy first to remove unhealthy cells, and then they receive healthy stem cells to rebuild their blood and immune system.</p>
+        <p data-i18n="effects-p2">Stem cells also send out chemical signals that can reduce swelling, help new blood vessels grow, and speed up healing. In Canada, treatments usually use a patient's own stem cells or donor cells that are a close match to make them safer. But there are still some risks, like the body rejecting the cells, the cells growing the wrong way, or, in rare cases, forming tumors.</p>
       </div>
     </div>
 
     <div class="card">
-      <div class="partner-label">Partner 2</div>
-      <h2>Pros and Cons of the Technology</h2>
+      <div class="partner-label" data-i18n="label-p2">Partner 2</div>
+      <h2 data-i18n="proscons-title">Pros and Cons of the Technology</h2>
       <div class="two-col">
         <div class="pros-box">
-          <h3>Advantages</h3>
+          <h3 data-i18n="advantages">Advantages</h3>
           <ul>
-            <li>Can repair or replace damaged tissues</li>
-            <li>May cure diseases with no current treatment</li>
-            <li>Patient's own cells reduce rejection risk</li>
-            <li>Treats leukemia, MS, and heart damage</li>
-            <li>Valuable in drug testing and research</li>
+            <li data-i18n="pro1">Can repair or replace damaged tissues</li>
+            <li data-i18n="pro2">May cure diseases with no current treatment</li>
+            <li data-i18n="pro3">Patient's own cells reduce rejection risk</li>
+            <li data-i18n="pro4">Treats leukemia, MS, and heart damage</li>
+            <li data-i18n="pro5">Valuable in drug testing and research</li>
           </ul>
         </div>
         <div class="cons-box">
-          <h3>Disadvantages</h3>
+          <h3 data-i18n="disadvantages">Disadvantages</h3>
           <ul>
-            <li>High cost; many treatments experimental</li>
-            <li>Donor cells may be rejected</li>
-            <li>Rare risk of tumor formation</li>
-            <li>Ethical concerns over embryonic stem cells</li>
-            <li>Long-term effects still being studied</li>
+            <li data-i18n="con1">High cost; many treatments experimental</li>
+            <li data-i18n="con2">Donor cells may be rejected</li>
+            <li data-i18n="con3">Rare risk of tumor formation</li>
+            <li data-i18n="con4">Ethical concerns over embryonic stem cells</li>
+            <li data-i18n="con5">Long-term effects still being studied</li>
           </ul>
         </div>
       </div>
-      <p style="margin-top:18px;">Looking ahead, stem cells could play a major role in personalized medicine and even lab-grown organ transplants. But because the technology is still developing, ongoing research and regulation are needed to ensure safety and fairness for all patients.</p>
+      <p style="margin-top:18px;" data-i18n="proscons-foot">Looking ahead, stem cells could play a major role in personalized medicine and even lab-grown organ transplants. But because the technology is still developing, ongoing research and regulation are needed to ensure safety and fairness for all patients.</p>
     </div>
 
     <div class="card">
-      <div class="partner-label">Partner 2</div>
-      <h2>Environmental Impacts</h2>
-      <p>Stem cell research and production have real environmental costs. Labs use large amounts of single-use plastics (pipettes, flasks, test tubes) to maintain sterile conditions, creating significant waste. Energy use is also high, since stem cells must be grown in controlled clean rooms with cold storage and specialized equipment. Transporting cells requires cold-chain shipping, which adds to greenhouse gas emissions.</p>
-      <p>During clinical treatments, hospitals generate medical waste from sterile supplies like gowns, IV bags, and syringes. Leftover biological materials must be safely destroyed through incineration. On the positive side, many labs are adopting greener practices, such as closed production systems (which can cut emissions by about 50%), recyclable packaging, and energy-efficient equipment. STEMCELL Technologies, a Canadian company, is actively working to lower its carbon footprint.</p>
+      <div class="partner-label" data-i18n="label-p2">Partner 2</div>
+      <h2 data-i18n="env-title">Environmental Impacts</h2>
+      <p data-i18n="env-p1">Stem cell research and production have real environmental costs. Labs use large amounts of single-use plastics (pipettes, flasks, test tubes) to maintain sterile conditions, creating significant waste. Energy use is also high, since stem cells must be grown in controlled clean rooms with cold storage and specialized equipment. Transporting cells requires cold-chain shipping, which adds to greenhouse gas emissions.</p>
+      <p data-i18n="env-p2">During clinical treatments, hospitals generate medical waste from sterile supplies like gowns, IV bags, and syringes. Leftover biological materials must be safely destroyed through incineration. On the positive side, many labs are adopting greener practices, such as closed production systems (which can cut emissions by about 50%), recyclable packaging, and energy-efficient equipment. STEMCELL Technologies, a Canadian company, is actively working to lower its carbon footprint.</p>
     </div>
 
     <div class="card">
-      <div class="partner-label">Partner 2</div>
-      <h2>Moral and Ethical Issues</h2>
-      <p>The biggest ethical concern in stem cell technology is the use of embryonic stem cells, since obtaining them involves destroying an embryo. In Canada, strict regulations allow only leftover IVF embryos to be used, and full donor consent is required. To avoid this issue, most modern treatments now use adult stem cells or induced pluripotent stem cells (iPSCs), which do not involve embryos.</p>
-      <p>Consent and equal access are also important issues. Since treatments are expensive and mainly available at specialized hospitals, not everyone has equal access. Canadians are also warned against "stem cell tourism," where people travel abroad for unproven and potentially dangerous treatments. Overall, Canadian research follows strict ethical guidelines to ensure the technology helps people responsibly.</p>
+      <div class="partner-label" data-i18n="label-p2">Partner 2</div>
+      <h2 data-i18n="ethics-title">Moral and Ethical Issues</h2>
+      <p data-i18n="ethics-p1">Stem cell research raises some important moral and ethical questions. One big concern is where the stem cells come from. Using embryonic stem cells can be controversial because it involves destroying embryos. In Canada, strict rules make sure only leftover embryos from IVF can be used, and donors must give full consent. Most treatments now use adult or induced stem cells, which don't involve embryos.</p>
+      <p data-i18n="ethics-p2">Another issue is consent and patient rights. Donors must understand how their cells will be used, and patients need to know the risks and benefits of the treatments. Stem cell therapies can also be expensive and are not available everywhere, which means not everyone has equal access. Some people worry that using stem cells to change or repair the body is "playing God." That's why Canadian research follows strict ethical rules to make sure stem cells are used safely and responsibly, while focusing on helping patients.</p>
     </div>
 
     <div class="card">
-      <div class="partner-label">Partner 2 — Canadian Scientist</div>
-      <h2>Featured Scientist: Dr. Harold Atkins</h2>
+      <div class="partner-label" data-i18n="label-p2-sci">Partner 2 — Canadian Scientist</div>
+      <h2 data-i18n="sci2-title">Featured Scientist: Dr. Harold Atkins</h2>
       <div class="scientist-grid">
-        <img class="scientist-img" src="https://www.cca-reports.ca/wp-content/uploads/2019/10/Harold-Atkins-731x1024.jpg" alt="The Ottawa Hospital campus" onerror="this.style.background='#d4e8d9';this.removeAttribute('src')"/>
+        <img class="scientist-img" src="https://www.cca-reports.ca/wp-content/uploads/2019/10/Harold-Atkins-731x1024.jpg" alt="Dr. Harold Atkins" onerror="this.style.background='#d4e8d9';this.removeAttribute('src')"/>
         <div class="scientist-info">
-          <h3>Profile</h3>
+          <h3 data-i18n="profile">Profile</h3>
           <ul>
-            <li><strong>From:</strong> Ottawa, Ontario, Canada</li>
-            <li><strong>Education:</strong> University of Ottawa (B.Med.Sc. &amp; M.D.); specialized training at U of Ottawa, University of Washington, and Ontario Cancer Institute</li>
-            <li><strong>Current Position:</strong> Ottawa Hospital, Transplant and Cell Therapy Program; Senior Clinician Investigator, Ottawa Hospital Research Institute</li>
-            <li><strong>Connection to Stem Cells:</strong> Dr. Atkins specializes in hematopoietic stem cell transplants used to rebuild a patient's immune system after disease or chemotherapy. He treats patients with leukemia and multiple sclerosis, conducts clinical trials, and monitors outcomes to improve the safety and effectiveness of stem cell therapies.</li>
+            <li><strong data-i18n="from">From:</strong> <span data-i18n="sci2-from">Ottawa, Ontario, Canada</span></li>
+            <li><strong data-i18n="education">Education:</strong> <span data-i18n="sci2-edu">University of Ottawa (B.Med.Sc. &amp; M.D.); specialized training at U of Ottawa, University of Washington, and Ontario Cancer Institute</span></li>
+            <li><strong data-i18n="position">Current Position:</strong> <span data-i18n="sci2-pos">Ottawa Hospital, Transplant and Cell Therapy Program; Senior Clinician Investigator, Ottawa Hospital Research Institute</span></li>
+            <li><strong data-i18n="connection">Connection to Stem Cells:</strong> <span data-i18n="sci2-conn">Dr. Atkins specializes in hematopoietic stem cell transplants used to rebuild a patient's immune system after disease or chemotherapy. He treats patients with leukemia and multiple sclerosis, conducts clinical trials, and monitors outcomes to improve the safety and effectiveness of stem cell therapies.</span></li>
           </ul>
         </div>
       </div>
@@ -533,49 +664,49 @@
 
   </div>
 
-  <!-- QUIZ -->
+  <!-- ─── QUIZ ───────────────────────────────────────────── -->
   <div id="quiz" class="section">
 
-    <h2 class="section-heading">Quick Knowledge Check</h2>
+    <h2 class="section-heading" data-i18n="quiz-heading">Quick Knowledge Check</h2>
 
     <div class="quiz-intro">
-      <h2>Test What You Learned</h2>
-      <p>Select the best answer for each question below, then click Submit to see your score.</p>
+      <h2 data-i18n="quiz-title">Test What You Learned</h2>
+      <p data-i18n="quiz-sub">Select the best answer for each question below, then click Submit to see your score.</p>
     </div>
 
     <div class="quiz-card">
-      <p>1. What makes stem cells different from other cells in the body?</p>
-      <label><input type="radio" name="q1" value="a"> They only exist in the brain.</label>
-      <label><input type="radio" name="q1" value="b"> They can divide and turn into many different cell types.</label>
-      <label><input type="radio" name="q1" value="c"> They cannot reproduce at all.</label>
-      <label><input type="radio" name="q1" value="d"> They are only found in plants.</label>
+      <p data-i18n="q1">1. What makes stem cells different from other cells in the body?</p>
+      <label><input type="radio" name="q1" value="a"> <span data-i18n="q1a">They only exist in the brain.</span></label>
+      <label><input type="radio" name="q1" value="b"> <span data-i18n="q1b">They can divide and turn into many different cell types.</span></label>
+      <label><input type="radio" name="q1" value="c"> <span data-i18n="q1c">They cannot reproduce at all.</span></label>
+      <label><input type="radio" name="q1" value="d"> <span data-i18n="q1d">They are only found in plants.</span></label>
     </div>
 
     <div class="quiz-card">
-      <p>2. What is one major ethical concern about embryonic stem cells?</p>
-      <label><input type="radio" name="q2" value="a"> They are too expensive to study.</label>
-      <label><input type="radio" name="q2" value="b"> They do not work in humans.</label>
-      <label><input type="radio" name="q2" value="c"> Obtaining them involves destroying an embryo.</label>
-      <label><input type="radio" name="q2" value="d"> They can only be used in Canada.</label>
+      <p data-i18n="q2">2. What is one major ethical concern about embryonic stem cells?</p>
+      <label><input type="radio" name="q2" value="a"> <span data-i18n="q2a">They are too expensive to study.</span></label>
+      <label><input type="radio" name="q2" value="b"> <span data-i18n="q2b">They do not work in humans.</span></label>
+      <label><input type="radio" name="q2" value="c"> <span data-i18n="q2c">Obtaining them involves destroying an embryo.</span></label>
+      <label><input type="radio" name="q2" value="d"> <span data-i18n="q2d">They can only be used in Canada.</span></label>
     </div>
 
     <div class="quiz-card">
-      <p>3. What does "differentiation" mean in stem cell biology?</p>
-      <label><input type="radio" name="q3" value="a"> A stem cell dying off.</label>
-      <label><input type="radio" name="q3" value="b"> A stem cell becoming a specialized cell type.</label>
-      <label><input type="radio" name="q3" value="c"> A stem cell moving through the bloodstream.</label>
-      <label><input type="radio" name="q3" value="d"> Two stem cells combining together.</label>
+      <p data-i18n="q3">3. What does "differentiation" mean in stem cell biology?</p>
+      <label><input type="radio" name="q3" value="a"> <span data-i18n="q3a">A stem cell dying off.</span></label>
+      <label><input type="radio" name="q3" value="b"> <span data-i18n="q3b">A stem cell becoming a specialized cell type.</span></label>
+      <label><input type="radio" name="q3" value="c"> <span data-i18n="q3c">A stem cell moving through the bloodstream.</span></label>
+      <label><input type="radio" name="q3" value="d"> <span data-i18n="q3d">Two stem cells combining together.</span></label>
     </div>
 
     <div class="quiz-card">
-      <p>4. Which Canadian hospital is a leading center for stem cell transplants?</p>
-      <label><input type="radio" name="q4" value="a"> Toronto General Hospital</label>
-      <label><input type="radio" name="q4" value="b"> Vancouver General Hospital</label>
-      <label><input type="radio" name="q4" value="c"> The Ottawa Hospital</label>
-      <label><input type="radio" name="q4" value="d"> Montreal Children's Hospital</label>
+      <p data-i18n="q4">4. Which Canadian hospital is a leading center for stem cell transplants?</p>
+      <label><input type="radio" name="q4" value="a"> <span data-i18n="q4a">Toronto General Hospital</span></label>
+      <label><input type="radio" name="q4" value="b"> <span data-i18n="q4b">Vancouver General Hospital</span></label>
+      <label><input type="radio" name="q4" value="c"> <span data-i18n="q4c">The Ottawa Hospital</span></label>
+      <label><input type="radio" name="q4" value="d"> <span data-i18n="q4d">Montreal Children's Hospital</span></label>
     </div>
 
-    <button id="submit-quiz" onclick="checkQuiz()">Submit Answers</button>
+    <button id="submit-quiz" onclick="checkQuiz()" data-i18n="submit">Submit Answers</button>
     <p id="quiz-result"></p>
 
   </div>
@@ -583,44 +714,307 @@
 </main>
 
 <footer>
-  <p><strong>Stem Cell Technology</strong> — Science Research Project</p>
-  <p>Inaaya K. &amp; Chetana &nbsp;|&nbsp; Sources: Mayo Clinic, NIH, Stem Cell Network Canada, Ottawa Hospital Foundation, STEMCELL Technologies</p>
-  <p style="margin-top:8px; font-size:0.72rem;"> </p>
+  <p><strong data-i18n="footer-title">Stem Cell Technology</strong> — <span data-i18n="footer-sub">Science Research Project</span></p>
+  <p>Inaaya K. &amp; Chetana &nbsp;|&nbsp; <span data-i18n="footer-sources">Sources: Mayo Clinic, NIH, Stem Cell Network Canada, Ottawa Hospital Foundation, STEMCELL Technologies</span></p>
 </footer>
 
 <script>
-  function showSection(id, btn) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    btn.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+/* ────────────────────────────────────────────────────────────
+   TRANSLATIONS
+──────────────────────────────────────────────────────────── */
+const translations = {
+  en: {
+    "header-tag": "Science Research Project",
+    "header-h1": "Stem Cell Technology",
+    "header-sub": "Inaaya & Chetana &nbsp;&bull;&nbsp; Topic: Stem Cells",
+    "nav-p1": "Partner 1 — How It Works",
+    "nav-p2": "Partner 2 — Effects & Impact",
+    "nav-quiz": "Quick Quiz",
+    "p1-heading": "Partner 1 — Background Research",
+    "p2-heading": "Partner 2 — Effects & Impact",
+    "quiz-heading": "Quick Knowledge Check",
+    "did-you-know": "Did you know?",
+    "key-fact": "Key Fact:",
+    "fact1": "The human body contains over 200 different cell types, and stem cells have the potential to develop into almost any one of them.",
+    "fact2": "In Canada, stem cell transplants have been used to treat over 20 different diseases, with the Ottawa Hospital being one of the leading centers for this research.",
+    "img-cap1": "Diagram: How stem cells divide and differentiate into specialized cell types.",
+    "img-cap2": "Stem cells imaged under a fluorescence microscope during laboratory research.",
+    "label-p1": "Partner 1",
+    "label-p2": "Partner 2",
+    "label-p1-sci": "Partner 1 — Canadian Scientist",
+    "label-p2-sci": "Partner 2 — Canadian Scientist",
+    "how-works-title": "How the Technology Works",
+    "how-works-p1": "Stem cells are unique cells in the body that haven't specialized yet. Unlike regular cells, they can keep dividing and turn into different types, like muscle, brain, or blood cells. This process is called differentiation. There are two main types: embryonic stem cells, which come from very early embryos and can become almost any type of cell, and adult stem cells, which are found in tissues like bone marrow and can only become certain types.",
+    "how-works-p2": "In therapy, scientists grow stem cells in a lab, guide them to become the right type, and then put them into patients. The goal is for these cells to replace damaged or missing cells. Researchers can also use tools like CRISPR to edit stem cells before giving them to patients, making the treatment more precise and effective.",
+    "patient-title": "What the Patient Can Expect",
+    "patient-p1": "Before a stem cell transplant, most patients go through a preparation phase. This usually involves chemotherapy or radiation to get rid of damaged or unhealthy cells and make space for the new stem cells. This part can be tough on the body and cause side effects like tiredness, nausea, and a weaker immune system.",
+    "patient-p2": "After the transplant, patients are closely watched in a hospital or clinic. Recovery can take anywhere from a few weeks to a few months, depending on the treatment. Patients often need medicine to stop their immune system from attacking the new cells, which is called graft-versus-host disease. If everything goes well, the new stem cells start working properly and the patient's health improves.",
+    "why-title": "Why the Technology Is Being Used",
+    "why-p1": "Stem cell technology is being used because it offers hope for diseases that currently have no permanent cure. Conditions like leukemia, multiple sclerosis, Type 1 diabetes, and Parkinson's disease involve the loss or malfunction of specific cells. Stem cells can potentially replace those damaged cells and restore normal function, which traditional medicine cannot always do.",
+    "why-p2": "Another reason is personalized medicine. Scientists can take a patient's own cells, reprogram them into stem cells (called iPSCs), and create treatments designed specifically for that individual. This lowers the risk of rejection and side effects. The technology is also used to test new drugs in the lab before trying them on humans, which speeds up research and improves safety.",
+    "understanding-title": "How It Has Enhanced Our Understanding of Cells",
+    "understanding-p1": "Stem cells have given scientists a way to watch how human cells develop in real time. Before this technology, researchers mostly had to study cells from animals or dead tissue. Now they can grow living human cells in a lab and observe exactly how they divide, specialize, and respond to disease or damage.",
+    "understanding-p2": "This has led to major discoveries about genetic diseases. By creating stem cells from patients with conditions like cystic fibrosis or ALS, scientists can study those diseases directly on living human tissue. It has also helped researchers understand how cancers develop, since some cancers appear to start from cells that behave like stem cells gone wrong.",
+    "sci1-title": "Featured Scientist: Dr. Mick Bhatia",
+    "sci2-title": "Featured Scientist: Dr. Harold Atkins",
+    "profile": "Profile",
+    "country": "Country:",
+    "education": "Education:",
+    "position": "Current Position:",
+    "connection": "Connection to Stem Cells:",
+    "from": "From:",
+    "sci1-country": "Canada",
+    "sci1-edu": "University of Ottawa (B.Sc.), University of Toronto (Ph.D.)",
+    "sci1-pos": "Director, McMaster Stem Cell and Cancer Research Institute, Hamilton, Ontario",
+    "sci1-conn": "Dr. Bhatia's lab studies how stem cells turn into blood cells and how cancer stem cells drive tumor growth. He has developed lab methods for producing blood cells from stem cells and pioneered work converting human skin cells directly into blood cells — skipping the embryonic stage, which significantly reduces ethical concerns.",
+    "sci2-from": "Ottawa, Ontario, Canada",
+    "sci2-edu": "University of Ottawa (B.Med.Sc. & M.D.); specialized training at U of Ottawa, University of Washington, and Ontario Cancer Institute",
+    "sci2-pos": "Ottawa Hospital, Transplant and Cell Therapy Program; Senior Clinician Investigator, Ottawa Hospital Research Institute",
+    "sci2-conn": "Dr. Atkins specializes in hematopoietic stem cell transplants used to rebuild a patient's immune system after disease or chemotherapy. He treats patients with leukemia and multiple sclerosis, conducts clinical trials, and monitors outcomes to improve the safety and effectiveness of stem cell therapies.",
+    "effects-title": "Effects on the Human Body",
+    "effects-p1": "Stem cells are really important because they can help repair or replace damaged parts of the body. For example, in people with heart problems, doctors can inject stem cells into damaged areas of the heart to help grow new heart muscle and make the heart work better after a heart attack. A common use of stem cells is in bone marrow transplants for diseases like leukemia. Patients usually get chemotherapy first to remove unhealthy cells, and then they receive healthy stem cells to rebuild their blood and immune system.",
+    "effects-p2": "Stem cells also send out chemical signals that can reduce swelling, help new blood vessels grow, and speed up healing. In Canada, treatments usually use a patient's own stem cells or donor cells that are a close match to make them safer. But there are still some risks, like the body rejecting the cells, the cells growing the wrong way, or, in rare cases, forming tumors.",
+    "proscons-title": "Pros and Cons of the Technology",
+    "advantages": "Advantages",
+    "disadvantages": "Disadvantages",
+    "pro1": "Can repair or replace damaged tissues",
+    "pro2": "May cure diseases with no current treatment",
+    "pro3": "Patient's own cells reduce rejection risk",
+    "pro4": "Treats leukemia, MS, and heart damage",
+    "pro5": "Valuable in drug testing and research",
+    "con1": "High cost; many treatments experimental",
+    "con2": "Donor cells may be rejected",
+    "con3": "Rare risk of tumor formation",
+    "con4": "Ethical concerns over embryonic stem cells",
+    "con5": "Long-term effects still being studied",
+    "proscons-foot": "Looking ahead, stem cells could play a major role in personalized medicine and even lab-grown organ transplants. But because the technology is still developing, ongoing research and regulation are needed to ensure safety and fairness for all patients.",
+    "env-title": "Environmental Impacts",
+    "env-p1": "Stem cell research and production have real environmental costs. Labs use large amounts of single-use plastics (pipettes, flasks, test tubes) to maintain sterile conditions, creating significant waste. Energy use is also high, since stem cells must be grown in controlled clean rooms with cold storage and specialized equipment. Transporting cells requires cold-chain shipping, which adds to greenhouse gas emissions.",
+    "env-p2": "During clinical treatments, hospitals generate medical waste from sterile supplies like gowns, IV bags, and syringes. Leftover biological materials must be safely destroyed through incineration. On the positive side, many labs are adopting greener practices, such as closed production systems (which can cut emissions by about 50%), recyclable packaging, and energy-efficient equipment. STEMCELL Technologies, a Canadian company, is actively working to lower its carbon footprint.",
+    "ethics-title": "Moral and Ethical Issues",
+    "ethics-p1": "Stem cell research raises some important moral and ethical questions. One big concern is where the stem cells come from. Using embryonic stem cells can be controversial because it involves destroying embryos. In Canada, strict rules make sure only leftover embryos from IVF can be used, and donors must give full consent. Most treatments now use adult or induced stem cells, which don't involve embryos.",
+    "ethics-p2": "Another issue is consent and patient rights. Donors must understand how their cells will be used, and patients need to know the risks and benefits of the treatments. Stem cell therapies can also be expensive and are not available everywhere, which means not everyone has equal access. Some people worry that using stem cells to change or repair the body is \"playing God.\" That's why Canadian research follows strict ethical rules to make sure stem cells are used safely and responsibly, while focusing on helping patients.",
+    "quiz-title": "Test What You Learned",
+    "quiz-sub": "Select the best answer for each question below, then click Submit to see your score.",
+    "q1": "1. What makes stem cells different from other cells in the body?",
+    "q1a": "They only exist in the brain.",
+    "q1b": "They can divide and turn into many different cell types.",
+    "q1c": "They cannot reproduce at all.",
+    "q1d": "They are only found in plants.",
+    "q2": "2. What is one major ethical concern about embryonic stem cells?",
+    "q2a": "They are too expensive to study.",
+    "q2b": "They do not work in humans.",
+    "q2c": "Obtaining them involves destroying an embryo.",
+    "q2d": "They can only be used in Canada.",
+    "q3": "3. What does \"differentiation\" mean in stem cell biology?",
+    "q3a": "A stem cell dying off.",
+    "q3b": "A stem cell becoming a specialized cell type.",
+    "q3c": "A stem cell moving through the bloodstream.",
+    "q3d": "Two stem cells combining together.",
+    "q4": "4. Which Canadian hospital is a leading center for stem cell transplants?",
+    "q4a": "Toronto General Hospital",
+    "q4b": "Vancouver General Hospital",
+    "q4c": "The Ottawa Hospital",
+    "q4d": "Montreal Children's Hospital",
+    "submit": "Submit Answers",
+    "result-perfect": "Perfect — 4/4! Great work.",
+    "result-good": "Good effort! You got {score} out of 4 correct.",
+    "result-low": "You got {score}/4. Review the sections and try again!",
+    "footer-title": "Stem Cell Technology",
+    "footer-sub": "Science Research Project",
+    "footer-sources": "Sources: Mayo Clinic, NIH, Stem Cell Network Canada, Ottawa Hospital Foundation, STEMCELL Technologies",
+    "theme-light": "Light Mode",
+    "theme-dark": "Dark Mode"
+  },
+  fr: {
+    "header-tag": "Projet de Recherche Scientifique",
+    "header-h1": "Technologie des Cellules Souches",
+    "header-sub": "Inaaya & Chetana &nbsp;&bull;&nbsp; Sujet : Cellules Souches",
+    "nav-p1": "Partenaire 1 — Fonctionnement",
+    "nav-p2": "Partenaire 2 — Effets & Impact",
+    "nav-quiz": "Quiz Rapide",
+    "p1-heading": "Partenaire 1 — Recherche de Base",
+    "p2-heading": "Partenaire 2 — Effets & Impact",
+    "quiz-heading": "Vérification des Connaissances",
+    "did-you-know": "Le saviez-vous ?",
+    "key-fact": "Fait clé :",
+    "fact1": "Le corps humain contient plus de 200 types de cellules différents, et les cellules souches ont le potentiel de se développer en presque n'importe lequel d'entre eux.",
+    "fact2": "Au Canada, les greffes de cellules souches ont été utilisées pour traiter plus de 20 maladies différentes, l'Hôpital d'Ottawa étant l'un des principaux centres de cette recherche.",
+    "img-cap1": "Schéma : Comment les cellules souches se divisent et se différencient en types cellulaires spécialisés.",
+    "img-cap2": "Cellules souches imagées sous un microscope à fluorescence lors de recherches en laboratoire.",
+    "label-p1": "Partenaire 1",
+    "label-p2": "Partenaire 2",
+    "label-p1-sci": "Partenaire 1 — Scientifique Canadien",
+    "label-p2-sci": "Partenaire 2 — Scientifique Canadien",
+    "how-works-title": "Comment Fonctionne la Technologie",
+    "how-works-p1": "Les cellules souches sont des cellules uniques dans le corps qui ne se sont pas encore spécialisées. Contrairement aux cellules ordinaires, elles peuvent continuer à se diviser et se transformer en différents types, comme les cellules musculaires, cérébrales ou sanguines. Ce processus s'appelle la différenciation. Il existe deux types principaux : les cellules souches embryonnaires, qui proviennent de très jeunes embryons et peuvent devenir presque n'importe quel type de cellule, et les cellules souches adultes, qui se trouvent dans des tissus comme la moelle osseuse et ne peuvent devenir que certains types.",
+    "how-works-p2": "En thérapie, les scientifiques cultivent des cellules souches en laboratoire, les guident pour devenir le bon type, puis les introduisent dans les patients. L'objectif est que ces cellules remplacent les cellules endommagées ou manquantes. Les chercheurs peuvent également utiliser des outils comme CRISPR pour modifier les cellules souches avant de les donner aux patients, rendant le traitement plus précis et efficace.",
+    "patient-title": "Ce que le Patient Peut Attendre",
+    "patient-p1": "Avant une greffe de cellules souches, la plupart des patients passent par une phase de préparation. Cela implique généralement une chimiothérapie ou une radiothérapie pour éliminer les cellules endommagées ou malsaines et faire de la place pour les nouvelles cellules souches. Cette étape peut être difficile pour le corps et provoquer des effets secondaires comme la fatigue, les nausées et un système immunitaire affaibli.",
+    "patient-p2": "Après la greffe, les patients sont étroitement surveillés dans un hôpital ou une clinique. La récupération peut prendre de quelques semaines à quelques mois, selon le traitement. Les patients ont souvent besoin de médicaments pour empêcher leur système immunitaire d'attaquer les nouvelles cellules, ce qu'on appelle la maladie du greffon contre l'hôte. Si tout se passe bien, les nouvelles cellules souches commencent à fonctionner correctement et la santé du patient s'améliore.",
+    "why-title": "Pourquoi Cette Technologie Est Utilisée",
+    "why-p1": "La technologie des cellules souches est utilisée parce qu'elle offre de l'espoir pour des maladies qui n'ont actuellement pas de remède permanent. Des conditions comme la leucémie, la sclérose en plaques, le diabète de type 1 et la maladie de Parkinson impliquent la perte ou le dysfonctionnement de cellules spécifiques. Les cellules souches peuvent potentiellement remplacer ces cellules endommagées et restaurer une fonction normale, ce que la médecine traditionnelle ne peut pas toujours faire.",
+    "why-p2": "Une autre raison est la médecine personnalisée. Les scientifiques peuvent prendre les propres cellules d'un patient, les reprogrammer en cellules souches (appelées iPSCs), et créer des traitements conçus spécifiquement pour cet individu. Cela réduit le risque de rejet et les effets secondaires. La technologie est également utilisée pour tester de nouveaux médicaments en laboratoire avant de les essayer sur des humains, ce qui accélère la recherche et améliore la sécurité.",
+    "understanding-title": "Comment Cela a Amélioré Notre Compréhension des Cellules",
+    "understanding-p1": "Les cellules souches ont donné aux scientifiques un moyen d'observer comment les cellules humaines se développent en temps réel. Avant cette technologie, les chercheurs devaient surtout étudier les cellules d'animaux ou de tissu mort. Maintenant, ils peuvent faire pousser des cellules humaines vivantes en laboratoire et observer exactement comment elles se divisent, se spécialisent et répondent aux maladies ou aux dommages.",
+    "understanding-p2": "Cela a conduit à de grandes découvertes sur les maladies génétiques. En créant des cellules souches à partir de patients atteints de conditions comme la fibrose kystique ou la SLA, les scientifiques peuvent étudier ces maladies directement sur du tissu humain vivant. Cela a également aidé les chercheurs à comprendre comment les cancers se développent, car certains cancers semblent partir de cellules qui se comportent comme des cellules souches dérégulées.",
+    "sci1-title": "Scientifique en vedette : Dr. Mick Bhatia",
+    "sci2-title": "Scientifique en vedette : Dr. Harold Atkins",
+    "profile": "Profil",
+    "country": "Pays :",
+    "education": "Éducation :",
+    "position": "Poste actuel :",
+    "connection": "Lien avec les cellules souches :",
+    "from": "Origine :",
+    "sci1-country": "Canada",
+    "sci1-edu": "Université d'Ottawa (B.Sc.), Université de Toronto (Ph.D.)",
+    "sci1-pos": "Directeur, Institut de recherche sur les cellules souches et le cancer de McMaster, Hamilton, Ontario",
+    "sci1-conn": "Le laboratoire du Dr. Bhatia étudie comment les cellules souches se transforment en cellules sanguines et comment les cellules souches cancéreuses favorisent la croissance des tumeurs. Il a développé des méthodes de laboratoire pour produire des cellules sanguines à partir de cellules souches et a été pionnier dans la conversion de cellules cutanées humaines directement en cellules sanguines — en sautant l'étape embryonnaire, ce qui réduit considérablement les préoccupations éthiques.",
+    "sci2-from": "Ottawa, Ontario, Canada",
+    "sci2-edu": "Université d'Ottawa (B.Med.Sc. et M.D.) ; formation spécialisée à l'U. d'Ottawa, à l'Université de Washington et à l'Institut du cancer de l'Ontario",
+    "sci2-pos": "Hôpital d'Ottawa, Programme de transplantation et de thérapie cellulaire ; Chercheur clinicien principal, Institut de recherche de l'Hôpital d'Ottawa",
+    "sci2-conn": "Le Dr. Atkins est spécialisé dans les greffes de cellules souches hématopoïétiques utilisées pour reconstruire le système immunitaire d'un patient après une maladie ou une chimiothérapie. Il traite des patients atteints de leucémie et de sclérose en plaques, mène des essais cliniques et surveille les résultats pour améliorer la sécurité et l'efficacité des thérapies par cellules souches.",
+    "effects-title": "Effets sur le Corps Humain",
+    "effects-p1": "Les cellules souches sont vraiment importantes car elles peuvent aider à réparer ou remplacer les parties endommagées du corps. Par exemple, chez les personnes souffrant de problèmes cardiaques, les médecins peuvent injecter des cellules souches dans les zones endommagées du cœur pour aider à faire pousser de nouveaux muscles cardiaques et améliorer le fonctionnement du cœur après une crise cardiaque. Une utilisation courante des cellules souches est dans les greffes de moelle osseuse pour des maladies comme la leucémie. Les patients reçoivent généralement d'abord une chimiothérapie pour éliminer les cellules malsaines, puis ils reçoivent des cellules souches saines pour reconstruire leur sang et leur système immunitaire.",
+    "effects-p2": "Les cellules souches envoient également des signaux chimiques qui peuvent réduire l'inflammation, aider à la croissance de nouveaux vaisseaux sanguins et accélérer la guérison. Au Canada, les traitements utilisent généralement les propres cellules souches du patient ou des cellules donneuses bien compatibles pour les rendre plus sûres. Mais il y a encore certains risques, comme le rejet des cellules par le corps, la croissance incorrecte des cellules, ou, dans de rares cas, la formation de tumeurs.",
+    "proscons-title": "Avantages et Inconvénients de la Technologie",
+    "advantages": "Avantages",
+    "disadvantages": "Inconvénients",
+    "pro1": "Peut réparer ou remplacer les tissus endommagés",
+    "pro2": "Peut guérir des maladies sans traitement actuel",
+    "pro3": "Les propres cellules du patient réduisent le risque de rejet",
+    "pro4": "Traite la leucémie, la SP et les dommages cardiaques",
+    "pro5": "Précieux pour les tests de médicaments et la recherche",
+    "con1": "Coût élevé ; beaucoup de traitements expérimentaux",
+    "con2": "Les cellules donneuses peuvent être rejetées",
+    "con3": "Risque rare de formation de tumeurs",
+    "con4": "Préoccupations éthiques concernant les cellules souches embryonnaires",
+    "con5": "Les effets à long terme sont encore à l'étude",
+    "proscons-foot": "À l'avenir, les cellules souches pourraient jouer un rôle majeur dans la médecine personnalisée et même dans les transplantations d'organes cultivés en laboratoire. Mais comme la technologie est encore en développement, des recherches et une réglementation continues sont nécessaires pour assurer la sécurité et l'équité pour tous les patients.",
+    "env-title": "Impacts Environnementaux",
+    "env-p1": "La recherche et la production de cellules souches ont de réels coûts environnementaux. Les laboratoires utilisent de grandes quantités de plastiques à usage unique (pipettes, flacons, tubes à essai) pour maintenir des conditions stériles, créant des déchets importants. La consommation d'énergie est également élevée, car les cellules souches doivent être cultivées dans des salles blanches contrôlées avec stockage à froid et équipements spécialisés. Le transport des cellules nécessite une chaîne du froid, ce qui augmente les émissions de gaz à effet de serre.",
+    "env-p2": "Lors des traitements cliniques, les hôpitaux génèrent des déchets médicaux provenant de fournitures stériles comme les blouses, les poches de perfusion et les seringues. Les matériaux biologiques restants doivent être détruits en toute sécurité par incinération. Du côté positif, de nombreux laboratoires adoptent des pratiques plus vertes, comme les systèmes de production fermés (qui peuvent réduire les émissions d'environ 50 %), les emballages recyclables et les équipements économes en énergie. STEMCELL Technologies, une entreprise canadienne, travaille activement à réduire son empreinte carbone.",
+    "ethics-title": "Questions Morales et Éthiques",
+    "ethics-p1": "La recherche sur les cellules souches soulève d'importantes questions morales et éthiques. Une grande préoccupation est l'origine des cellules souches. L'utilisation de cellules souches embryonnaires peut être controversée car elle implique la destruction d'embryons. Au Canada, des règles strictes garantissent que seuls les embryons restants de la FIV peuvent être utilisés, et les donneurs doivent donner leur consentement éclairé. La plupart des traitements utilisent maintenant des cellules souches adultes ou induites, qui n'impliquent pas d'embryons.",
+    "ethics-p2": "Un autre problème est le consentement et les droits des patients. Les donneurs doivent comprendre comment leurs cellules seront utilisées, et les patients doivent connaître les risques et les avantages des traitements. Les thérapies par cellules souches peuvent également être coûteuses et ne sont pas disponibles partout, ce qui signifie que tout le monde n'y a pas un accès égal. Certaines personnes craignent que l'utilisation des cellules souches pour modifier ou réparer le corps soit « jouer à Dieu ». C'est pourquoi la recherche canadienne suit des règles éthiques strictes pour s'assurer que les cellules souches sont utilisées de manière sûre et responsable, tout en se concentrant sur l'aide aux patients.",
+    "quiz-title": "Testez Vos Connaissances",
+    "quiz-sub": "Sélectionnez la meilleure réponse pour chaque question ci-dessous, puis cliquez sur Soumettre pour voir votre score.",
+    "q1": "1. Qu'est-ce qui distingue les cellules souches des autres cellules du corps ?",
+    "q1a": "Elles n'existent que dans le cerveau.",
+    "q1b": "Elles peuvent se diviser et se transformer en de nombreux types de cellules.",
+    "q1c": "Elles ne peuvent pas se reproduire du tout.",
+    "q1d": "On ne les trouve que dans les plantes.",
+    "q2": "2. Quelle est une préoccupation éthique majeure concernant les cellules souches embryonnaires ?",
+    "q2a": "Elles sont trop coûteuses à étudier.",
+    "q2b": "Elles ne fonctionnent pas chez l'humain.",
+    "q2c": "Les obtenir implique la destruction d'un embryon.",
+    "q2d": "Elles ne peuvent être utilisées qu'au Canada.",
+    "q3": "3. Que signifie la « différenciation » en biologie des cellules souches ?",
+    "q3a": "Une cellule souche qui meurt.",
+    "q3b": "Une cellule souche qui devient un type cellulaire spécialisé.",
+    "q3c": "Une cellule souche qui se déplace dans la circulation sanguine.",
+    "q3d": "Deux cellules souches qui se combinent.",
+    "q4": "4. Quel hôpital canadien est un centre de premier plan pour les greffes de cellules souches ?",
+    "q4a": "Hôpital général de Toronto",
+    "q4b": "Hôpital général de Vancouver",
+    "q4c": "L'Hôpital d'Ottawa",
+    "q4d": "Hôpital de Montréal pour enfants",
+    "submit": "Soumettre les réponses",
+    "result-perfect": "Parfait — 4/4 ! Excellent travail.",
+    "result-good": "Bon effort ! Vous avez obtenu {score} sur 4.",
+    "result-low": "Vous avez obtenu {score}/4. Relisez les sections et réessayez !",
+    "footer-title": "Technologie des Cellules Souches",
+    "footer-sub": "Projet de Recherche Scientifique",
+    "footer-sources": "Sources : Mayo Clinic, NIH, Réseau de cellules souches du Canada, Fondation de l'Hôpital d'Ottawa, STEMCELL Technologies",
+    "theme-light": "Mode Clair",
+    "theme-dark": "Mode Sombre"
   }
+};
 
-  const answers = { q1: 'b', q2: 'c', q3: 'b', q4: 'c' };
+/* ────────────────────────────────────────────────────────────
+   LANGUAGE
+──────────────────────────────────────────────────────────── */
+let currentLang = 'en';
 
-  function checkQuiz() {
-    document.querySelectorAll('.quiz-card label').forEach(l => l.classList.remove('correct', 'wrong'));
-    let score = 0;
-    for (const [q, correct] of Object.entries(answers)) {
-      const selected = document.querySelector(`input[name="${q}"]:checked`);
-      if (!selected) continue;
-      if (selected.value === correct) {
-        selected.parentElement.classList.add('correct');
-        score++;
-      } else {
-        selected.parentElement.classList.add('wrong');
-        document.querySelectorAll(`input[name="${q}"]`).forEach(inp => {
-          if (inp.value === correct) inp.parentElement.classList.add('correct');
-        });
-      }
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.setAttribute('data-lang', lang);
+  document.documentElement.setAttribute('lang', lang);
+
+  // update every tagged element
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[lang][key] !== undefined) {
+      el.innerHTML = translations[lang][key];
     }
-    const result = document.getElementById('quiz-result');
-    result.style.display = 'block';
-    if (score === 4) result.textContent = 'Perfect — 4/4! Great work.';
-    else if (score >= 2) result.textContent = `Good effort! You got ${score} out of 4 correct.`;
-    else result.textContent = `You got ${score}/4. Review the sections and try again!`;
+  });
+
+  // update nav buttons (they also have data-i18n but their onclick text may need refreshing)
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+
+  // update theme label
+  updateThemeLabel();
+
+  // reset quiz result text
+  document.getElementById('quiz-result').style.display = 'none';
+}
+
+/* ────────────────────────────────────────────────────────────
+   THEME
+──────────────────────────────────────────────────────────── */
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  updateThemeLabel();
+}
+
+function updateThemeLabel() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const t = translations[currentLang];
+  document.getElementById('theme-label').textContent = isDark ? t['theme-dark'] : t['theme-light'];
+}
+
+/* ────────────────────────────────────────────────────────────
+   NAV
+──────────────────────────────────────────────────────────── */
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ────────────────────────────────────────────────────────────
+   QUIZ
+──────────────────────────────────────────────────────────── */
+const answers = { q1: 'b', q2: 'c', q3: 'b', q4: 'c' };
+
+function checkQuiz() {
+  document.querySelectorAll('.quiz-card label').forEach(l => l.classList.remove('correct', 'wrong'));
+  let score = 0;
+  for (const [q, correct] of Object.entries(answers)) {
+    const selected = document.querySelector(`input[name="${q}"]:checked`);
+    if (!selected) continue;
+    if (selected.value === correct) {
+      selected.parentElement.classList.add('correct');
+      score++;
+    } else {
+      selected.parentElement.classList.add('wrong');
+      document.querySelectorAll(`input[name="${q}"]`).forEach(inp => {
+        if (inp.value === correct) inp.parentElement.classList.add('correct');
+      });
+    }
   }
+  const result = document.getElementById('quiz-result');
+  result.style.display = 'block';
+  const t = translations[currentLang];
+  if (score === 4) result.textContent = t['result-perfect'];
+  else if (score >= 2) result.textContent = t['result-good'].replace('{score}', score);
+  else result.textContent = t['result-low'].replace('{score}', score);
+}
 </script>
 
 </body>
